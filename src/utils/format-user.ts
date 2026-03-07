@@ -18,8 +18,10 @@ export interface User {
  */
 export function formatUserSummary(user: User): string {
   const roleList = user.roles.join(", ");
-  const theme = user.metadata.preferences.theme;
-  const lastLogin = new Date(user.metadata.lastLogin).toLocaleDateString();
+  const theme = user.metadata?.preferences?.theme ?? 'default';
+  const lastLogin = user.metadata?.lastLogin 
+    ? new Date(user.metadata.lastLogin).toLocaleDateString()
+    : 'Never';
 
   return `${user.name} (${user.email}) — Roles: ${roleList} — Theme: ${theme} — Last login: ${lastLogin}`;
 }
