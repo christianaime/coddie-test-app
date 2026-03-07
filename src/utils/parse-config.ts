@@ -17,7 +17,7 @@ export function parseConfig(raw: Record<string, unknown>): AppConfig {
 
   // BUG: raw.allowedOrigins could be undefined, and calling .split on undefined throws
   const originsStr = raw.allowedOrigins as string;
-  const allowedOrigins = originsStr.split(",").map((s) => s.trim());
+  const allowedOrigins = originsStr ? originsStr.split(",").map((s) => s.trim()) : [];
 
   return { port, host, debug, allowedOrigins };
 }
